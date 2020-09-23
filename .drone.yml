@@ -20,7 +20,7 @@ steps:
         # - unzip -q awscliv2.zip
         # - ./aws/install
         - aws --version
-        - aws s3 sync s3://forgerock7-binaries .
+        - aws s3 sync s3://forgerock7-binaries /tmp
         - cd /tmp
         - unzip -q Amster-7.0.0.zip DS-7.0.0.zip IG-7.0.0.zip IDM-7.0.1.zip AM-7.0.0.zip
         - cd amster-7.0.0/samples/docker
