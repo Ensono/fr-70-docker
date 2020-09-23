@@ -15,4 +15,9 @@ steps:
         - ./aws/install
         - aws --version
         - aws s3 sync s3://forgerock7-binaries /tmp
-        - ls /tmp
+        - cd /tmp
+        - unzip -q Amster-7.0.0.zip -d amster
+        - unzip -q DS-7.0.0.zip -d ds 
+        - unzip -q IG-7.0.0.zip -d ig
+        - unzip -q IDM-7.0.1.zip -d idm
+        - unzip -q AM-7.0.0.zip -d amazonaws 
