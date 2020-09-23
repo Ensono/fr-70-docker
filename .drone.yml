@@ -3,7 +3,7 @@ name: build base images
 
 steps:
     - name: setup
-    #   image: docker:dind
+      image: docker:dind
     #   volumes:
     #   - name: dockersock
     #   - path: /var/run
