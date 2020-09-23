@@ -3,10 +3,10 @@ name: build base images
 
 steps:
     - name: setup
-      image: docker:dind
-      volumes:
-      - name: dockersock
-      - path: /var/run
+    #   image: docker:dind
+    #   volumes:
+    #   - name: dockersock
+    #   - path: /var/run
       environment:
         AWS_ACCESS_KEY_ID:
             from_secret: AWS_ACCESS_KEY_ID
