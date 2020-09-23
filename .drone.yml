@@ -29,13 +29,13 @@ steps:
         - docker build --tag amster:7.0 .
 
 services:
-- name: docker
-    image: docker:dind
-    privileged: true
-    volumes:
-    - name: dockersock
-      path: /var/run
+    - name: docker
+      image: docker:dind
+      privileged: true
+      volumes:
+      - name: dockersock
+        path: /var/run
     
 volumes:
-- name: dockersock
-  temp: {}
+    - name: dockersock
+      temp: {}
