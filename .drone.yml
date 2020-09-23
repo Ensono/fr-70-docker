@@ -20,4 +20,7 @@ steps:
         - unzip -q DS-7.0.0.zip -d ds 
         - unzip -q IG-7.0.0.zip -d ig
         - unzip -q IDM-7.0.1.zip -d idm
-        - unzip -q AM-7.0.0.zip -d amazonaws 
+        - unzip -q AM-7.0.0.zip -d amazonaws
+        - cd amster/samples/docker
+        - ./setup.sh
+        - docker build --tag amster:7.0 .
