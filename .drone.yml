@@ -14,5 +14,5 @@ steps:
         - unzip -q awscliv2.zip
         - ./aws/install
         - aws --version
-        - aws s3 cp s3://forgerock7-binaries /tmp
+        - aws s3 cp s3://forgerock7-binaries/* /tmp
         - ls /tmp
