@@ -18,7 +18,7 @@ steps:
         - pip3 install awscli boto3 'PyYAML<=3.13,>=3.10' aws-sam-cli docker-compose --upgrade
         - aws s3 sync s3://forgerock7-binaries /tmp
         - cd /tmp
-        - unzip Amster-7.0.0.zip 
+        - unzip Amster-7.0.0.zip -d amster
         # DS-7.0.0.zip IG-7.0.0.zip IDM-7.0.1.zip AM-7.0.0.zip
         - ls
         # - cd amster-7.0.0/samples/docker
