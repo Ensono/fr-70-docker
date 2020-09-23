@@ -13,12 +13,12 @@ steps:
         AWS_SECRET_ACCESS_KEY:
             from_secret: AWS_SECRET_ACCESS_KEY
       commands:
-        - apk add --no-cache bash build-base ca-certificates curl gettext git libffi-dev linux-headers make musl-dev openldap-dev openssh-client python3 py-pip python3-dev rsync tzdata
+        - apk add --no-cache bash build-base ca-certificates curl gettext git libffi-dev linux-headers make musl-dev openldap-dev openssh-client python3 py-pip python3-dev rsync tzdata unzip
         - pip3 install --upgrade pip
         - pip3 install awscli boto3 'PyYAML<=3.13,>=3.10' aws-sam-cli docker-compose --upgrade
         - aws s3 sync s3://forgerock7-binaries /tmp
         - cd /tmp
-        - unzip -q Amster-7.0.0.zip DS-7.0.0.zip IG-7.0.0.zip IDM-7.0.1.zip AM-7.0.0.zip
+        - unzip Amster-7.0.0.zip DS-7.0.0.zip IG-7.0.0.zip IDM-7.0.1.zip AM-7.0.0.zip
         - ls
         # - cd amster-7.0.0/samples/docker
         # - ./setup.sh
