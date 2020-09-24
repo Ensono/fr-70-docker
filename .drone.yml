@@ -76,6 +76,15 @@ steps:
         - apk add --no-cache bash build-base ca-certificates curl gettext git libffi-dev linux-headers make musl-dev openldap-dev openssh-client python3 py-pip python3-dev rsync tzdata unzip
         - pip3 install --upgrade pip
         - pip3 install awscli boto3 'PyYAML<=3.13,>=3.10' aws-sam-cli docker-compose --upgrade
+        - aws s3 sync s3://forgerock7-binaries .
+        - unzip -q Amster-7.0.0.zip -d amster
+        - unzip -q DS-7.0.0.zip -d ds
+        - unzip -q IG-7.0.0.zip -d ig 
+        - unzip -q IDM-7.0.1.zip -d idm 
+        - unzip -q AM-7.0.0.zip -d am
+        - ls
+        - cd amster/samples/docker
+        - ./setup.sh
       settings:
         access_key:
           from_secret: AWS_ACCESS_KEY_ID
@@ -84,5 +93,5 @@ steps:
         create_repository: true
         repo: dronetest
         registry: 499815288658.dkr.ecr.eu-west-1.amazonaws.com
-        dockerfile: /tmp/amster/samples/docker/dockerfile
+        dockerfile: amster/samples/docker/dockerfile
         region: eu-west-1
