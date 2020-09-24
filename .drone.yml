@@ -55,7 +55,7 @@ steps:
             from_secret: AWS_SECRET_ACCESS_KEY
       commands:
         - apt update
-         - apt install awscli -y
+        - apt install awscli -y
         - aws s3 sync s3://forgerock7-binaries /tmp
         - cd /tmp
         - unzip -q Amster-7.0.0.zip -d amster
