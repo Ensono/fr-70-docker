@@ -73,6 +73,8 @@ steps:
     - name: publish  
       image: plugins/ecr
       commands:
+        - apt update
+        - apt install curl
         - curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
         - aws --version
       settings:
