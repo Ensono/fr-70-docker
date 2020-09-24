@@ -72,8 +72,6 @@ steps:
 
     - name: publish  
       image: plugins/ecr
-      volumes:
-        - /var/run/docker.sock:/var/run/docker.sock
       settings:
         access_key:
           from_secret: AWS_ACCESS_KEY_ID
@@ -83,3 +81,5 @@ steps:
         repo: dronetest
         registry: 499815288658.dkr.ecr.eu-west-1.amazonaws.com
         dockerfile: /tmp/amster/samples/docker/dockerfile
+      volumes:
+        - /var/run/docker.sock:/var/run/docker.sock
