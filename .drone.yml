@@ -88,8 +88,7 @@ steps:
         - unzip -q IDM-7.0.1.zip -d idm 
         - unzip -q AM-7.0.0.zip -d am
         - ls
-        - cd amster/samples/docker
-        - ./setup.sh
+        - ./amster/samples/docker/setup.sh
       settings:
         access_key:
           from_secret: AWS_ACCESS_KEY_ID
