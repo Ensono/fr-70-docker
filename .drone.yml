@@ -73,10 +73,9 @@ steps:
     - name: publish  
       image: plugins/ecr
       commands:
-        - apt update
-        - apt install curl
-        - curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-        - aws --version
+        - apk add --no-cache bash build-base ca-certificates curl gettext git libffi-dev linux-headers make musl-dev openldap-dev openssh-client python3 py-pip python3-dev rsync tzdata unzip
+        - pip3 install --upgrade pip
+        - pip3 install awscli boto3 'PyYAML<=3.13,>=3.10' aws-sam-cli docker-compose --upgrade
       settings:
         access_key:
           from_secret: AWS_ACCESS_KEY_ID
