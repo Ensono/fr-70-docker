@@ -72,6 +72,8 @@ steps:
 
     - name: publish  
       image: plugins/ecr
+      commands:
+        - echo "commands run"
       settings:
         access_key:
           from_secret: AWS_ACCESS_KEY_ID
