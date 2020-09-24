@@ -41,18 +41,37 @@
 #       temp: {}
 
 
-pipeline:
-  build:
-    image: node
-    commands:
-      - apt update
-      - apt install awscli -y
-      - aws --version
-  publish:
-    environment:
-      AWS_ACCESS_KEY_ID:
-          from_secret: AWS_ACCESS_KEY_ID
-      AWS_SECRET_ACCESS_KEY:
-          from_secret: AWS_SECRET_ACCESS_KEY
-    image: plugins/docker
-    repo: 499815288658.dkr.ecr.eu-west-1.amazonaws.com/drone_test
+
+kind: pipeline
+name: build base images
+
+steps:
+    - name: setup
+      image: node
+      environment:
+        AWS_ACCESS_KEY_ID:
+            from_secret: AWS_ACCESS_KEY_ID
+        AWS_SECRET_ACCESS_KEY:
+            from_secret: AWS_SECRET_ACCESS_KEY
+      commands:
+        - apt update
+         - apt install awscli -y
+        - aws s3 sync s3://forgerock7-binaries /tmp
+        - cd /tmp
+        - unzip -q Amster-7.0.0.zip -d amster
+        - unzip -q DS-7.0.0.zip -d ds
+        - unzip -q IG-7.0.0.zip -d ig 
+        - unzip -q IDM-7.0.1.zip -d idm 
+        - unzip -q AM-7.0.0.zip -d am
+        - ls
+        - cd amster/samples/docker
+        - ./setup.sh
+
+
+    - name: publish  
+      image: plugins/ecr
+      settings:
+        create_repository: true
+        repo: drone_test
+        registry: 499815288658.dkr.ecr.eu-west-1.amazonaws.com
+        dockerfile: /tmp/amster/samples/docker/dockerfile
