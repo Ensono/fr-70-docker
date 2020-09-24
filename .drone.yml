@@ -56,7 +56,7 @@ steps:
       commands:
         - apt update
         - apt install awscli -y
-        - aws s3 sync s3://forgerock7-binaries /tmp
+        - aws s3 sync s3://forgerock7-binaries /tmp --no-progress
         - cd /tmp
         - unzip -q Amster-7.0.0.zip -d amster
         - unzip -q DS-7.0.0.zip -d ds
