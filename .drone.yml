@@ -29,6 +29,7 @@ steps:
       commands:
         - ls
         - cd amster
+        - ls
       settings:
         access_key:
           from_secret: AWS_ACCESS_KEY_ID
