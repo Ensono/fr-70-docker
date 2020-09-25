@@ -2,7 +2,7 @@ kind: pipeline
 name: build base images
 
 steps:
-    - name: publish  
+    - name: build  
       image: plugins/ecr
       environment:
         AWS_ACCESS_KEY_ID:
@@ -23,6 +23,9 @@ steps:
         - cd amster/samples/docker
         - ./setup.sh
         # - aws ecr get-login-password --region eu-west-1 | docker login --username AWS --password-stdin 499815288658.dkr.ecr.eu-west-1.amazonaws.com
+      
+    - name: publish  
+      image: plugins/ecr
       settings:
         access_key:
           from_secret: AWS_ACCESS_KEY_ID
