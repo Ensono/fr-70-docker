@@ -1,7 +1,7 @@
 kind: pipeline
 name: build base images
 
-  steps:
+steps:
     - name: prune
       image: plugins/docker
       commands:
