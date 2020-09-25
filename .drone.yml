@@ -23,8 +23,8 @@ steps:
         # - unzip -q IDM-7.0.1.zip -d idm 
         # - unzip -q AM-7.0.0.zip -d am
         - cd amster/samples/docker
-        - ls amster/samples/docker/build
         - ./setup.sh
+        - ls amster/samples/docker/build
       
     - name: publish  
       image: plugins/ecr
