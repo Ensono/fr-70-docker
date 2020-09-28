@@ -44,7 +44,7 @@ steps:
           path: /var/run
       commands:
         - apk update
-        - apk add --no-cache curl jq python py-pip
+        - apk add --update --no-cache jq curl py-pip
         - pip install awscli
         - cd amster/samples/docker
         - $(aws ecr get-login --no-include-email --region us-east-1)
