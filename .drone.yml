@@ -1,15 +1,14 @@
 kind: pipeline
 name: build base images
 
-environment:
-  AWS_ACCESS_KEY_ID:
-      from_secret: AWS_ACCESS_KEY_ID
-  AWS_SECRET_ACCESS_KEY:
-      from_secret: AWS_SECRET_ACCESS_KEY
-
 steps:
     - name: build  
       image: node
+      environment:
+        AWS_ACCESS_KEY_ID:
+            from_secret: AWS_ACCESS_KEY_ID
+        AWS_SECRET_ACCESS_KEY:
+            from_secret: AWS_SECRET_ACCESS_KEY
       commands:
         - curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
         - unzip awscliv2.zip
@@ -40,6 +39,11 @@ steps:
 
     - name: publish  
       image: docker:latest
+      environment:
+        AWS_ACCESS_KEY_ID:
+            from_secret: AWS_ACCESS_KEY_ID
+        AWS_SECRET_ACCESS_KEY:
+            from_secret: AWS_SECRET_ACCESS_KEY
       volumes:
         - name: dockersock
           path: /var/run
