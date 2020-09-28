@@ -55,8 +55,8 @@ steps:
         - $(aws ecr get-login --no-include-email --region eu-west-1)
         - cd amster/samples/docker
         - docker build -t amster .
-        - docker tag amster "$ECR_REGISTRY:$DRONE_COMMIT_SHA"
-        - docker push "$ECR_REGISTRY:$DRONE_COMMIT_SHA"
+        - docker tag amster $ECR_REGISTRY:$DRONE_COMMIT_SHA
+        - docker push $ECR_REGISTRY:$DRONE_COMMIT_SHA
 
 services:
   - name: docker
