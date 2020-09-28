@@ -17,12 +17,14 @@ steps:
         - aws s3 sync s3://forgerock7-binaries . --no-progress
         - unzip -q Amster-7.0.0.zip -d amster
         - unzip -q AM-7.0.0.zip -d am
+        - ls
         # - unzip -q DS-7.0.0.zip -d ds
         # - unzip -q IG-7.0.0.zip -d ig 
         # - unzip -q IDM-7.0.1.zip -d idm 
         - cd amster/samples/docker
         - ./setup.sh
         - cd /drone/src
+        - ls
         - cd am/samples/docker
         - chmod u+x setup.sh
         - sed -i'.tmp' -e 's/[Oo]pen[Aa][Mm]/AM/g' setup.sh
