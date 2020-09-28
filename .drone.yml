@@ -24,7 +24,7 @@ steps:
         - cd amster/samples/docker
         - ./setup.sh
         - cd /drone/src
-        - ls
+        - ls am
         - cd am/samples/docker
         - chmod u+x setup.sh
         - sed -i'.tmp' -e 's/[Oo]pen[Aa][Mm]/AM/g' setup.sh
