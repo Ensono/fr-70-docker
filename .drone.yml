@@ -15,12 +15,20 @@ steps:
         - ./aws/install
         - aws s3 sync s3://forgerock7-binaries . --no-progress
         - unzip -q Amster-7.0.0.zip -d amster
+        - unzip -q AM-7.0.0.zip -d am
         # - unzip -q DS-7.0.0.zip -d ds
         # - unzip -q IG-7.0.0.zip -d ig 
         # - unzip -q IDM-7.0.1.zip -d idm 
-        # - unzip -q AM-7.0.0.zip -d am
         - cd amster/samples/docker
         - ./setup.sh
+        - cd am/samples/docker
+        - chmod u+x setup.sh
+        - sed -i'.tmp' -e 's/[Oo]pen[Aa][Mm]/AM/g' setup.sh
+        - ./setup.sh
+        - cd images/am-empty
+        - chmod u+x docker-entrypoint.sh
+        - chmod u+x scripts/*
+        - sed -i'.tmp' -e 's/openam.war/AM.war/g' Dockerfile
 
     - name: publish  
       image: docker:latest
@@ -39,8 +47,9 @@ steps:
         - $(aws ecr get-login --no-include-email --region eu-west-1)
         - cd amster/samples/docker
         - docker build -t amster .
-        - docker tag amster $ECR_REGISTRY/amster:drone_build_$DRONE_BUILD_NUMBER
-        - docker push $ECR_REGISTRY/amster:drone_build_$DRONE_BUILD_NUMBER
+        - docker tag amster $ECR_REGISTRY/amster:${DRONE_BRANCH//\//-}-${DRONE_COMMIT_SHA:0:8}
+        - docker push $ECR_REGISTRY/amster:${DRONE_BRANCH//\//-}-${DRONE_COMMIT_SHA:0:8}
+        - cd 
 
 services:
   - name: docker
@@ -61,3 +70,6 @@ volumes:
 # docker pull $ECR_REGISTRY/<app_name>:$DRONE_COMMIT_SHA
 # docker tag "from_ci" or "tests_passed" etc
 # docker push
+
+
+# ${DRONE_BRANCH//\//-}-${DRONE_COMMIT_SHA:0:8}
