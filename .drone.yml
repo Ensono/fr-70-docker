@@ -10,7 +10,7 @@ steps:
         AWS_SECRET_ACCESS_KEY:
             from_secret: AWS_SECRET_ACCESS_KEY
       commands:
-        - apt -qq update && apt -qq install curl unzip -y
+        - apt update && apt install curl unzip -y
         - curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
         - unzip -q awscliv2.zip
         - ./aws/install
@@ -51,7 +51,10 @@ steps:
         - docker build -t amster .
         - docker tag amster $ECR_REGISTRY/amster:${DRONE_BRANCH//\//-}-${DRONE_COMMIT_SHA:0:8}
         - docker push $ECR_REGISTRY/amster:${DRONE_BRANCH//\//-}-${DRONE_COMMIT_SHA:0:8}
-        # - cd 
+        - cd /drone/src/am/openam/samples/docker/images/am-empty
+        - docker build -t am .
+        - docker tag am $ECR_REGISTRY/am:${DRONE_BRANCH//\//-}-${DRONE_COMMIT_SHA:0:8}
+        - docker push $ECR_REGISTRY/am:${DRONE_BRANCH//\//-}-${DRONE_COMMIT_SHA:0:8}
 
 services:
   - name: docker
