@@ -40,6 +40,7 @@ steps:
     - name: publish  
       image: docker
       commands:
+        - sleep 30
         - cd amster/samples/docker
         - docker build .
 
