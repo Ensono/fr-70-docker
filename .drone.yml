@@ -21,14 +21,14 @@ steps:
         # - unzip -q IDM-7.0.1.zip -d idm 
         - cd amster/samples/docker
         - ./setup.sh
-        - cd am/samples/docker
-        - chmod u+x setup.sh
-        - sed -i'.tmp' -e 's/[Oo]pen[Aa][Mm]/AM/g' setup.sh
-        - ./setup.sh
-        - cd images/am-empty
-        - chmod u+x docker-entrypoint.sh
-        - chmod u+x scripts/*
-        - sed -i'.tmp' -e 's/openam.war/AM.war/g' Dockerfile
+        # - cd am/samples/docker
+        # - chmod u+x setup.sh
+        # - sed -i'.tmp' -e 's/[Oo]pen[Aa][Mm]/AM/g' setup.sh
+        # - ./setup.sh
+        # - cd images/am-empty
+        # - chmod u+x docker-entrypoint.sh
+        # - chmod u+x scripts/*
+        # - sed -i'.tmp' -e 's/openam.war/AM.war/g' Dockerfile
 
     - name: publish  
       image: docker:latest
