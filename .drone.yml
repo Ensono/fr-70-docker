@@ -53,3 +53,11 @@ services:
 volumes:
   - name: dockersock
     temp: {}
+
+    
+## NEXT STEPS
+# deploy to dev/test environment
+# run tests
+# docker pull $ECR_REGISTRY/<app_name>:$DRONE_COMMIT_SHA
+# docker tag "from_ci" or "tests_passed" etc
+# docker push
