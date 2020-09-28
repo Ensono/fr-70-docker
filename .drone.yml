@@ -38,7 +38,7 @@ steps:
     #     region: eu-west-1
 
     - name: publish  
-      image: docker:dind
+      image: docker:latest
       volumes:
         - name: dockersock
           path: /var/run
