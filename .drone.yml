@@ -53,20 +53,20 @@ steps:
         - docker build -t am .
 
     - name: push-images  
-    image: docker:latest
-    environment:
-      AWS_ACCESS_KEY_ID:
-          from_secret: AWS_ACCESS_KEY_ID
-      AWS_SECRET_ACCESS_KEY:
-          from_secret: AWS_SECRET_ACCESS_KEY
-    volumes:
-      - name: dockersock
-        path: /var/run
-    commands:
-      - docker tag amster $ECR_REGISTRY/amster:${DRONE_BRANCH//\//-}-${DRONE_COMMIT_SHA:0:8}
-      - docker push $ECR_REGISTRY/amster:${DRONE_BRANCH//\//-}-${DRONE_COMMIT_SHA:0:8}
-      - docker tag am $ECR_REGISTRY/am:${DRONE_BRANCH//\//-}-${DRONE_COMMIT_SHA:0:8}
-      - docker push $ECR_REGISTRY/am:${DRONE_BRANCH//\//-}-${DRONE_COMMIT_SHA:0:8}
+      image: docker:latest
+      environment:
+        AWS_ACCESS_KEY_ID:
+            from_secret: AWS_ACCESS_KEY_ID
+        AWS_SECRET_ACCESS_KEY:
+            from_secret: AWS_SECRET_ACCESS_KEY
+      volumes:
+        - name: dockersock
+          path: /var/run
+      commands:
+        - docker tag amster $ECR_REGISTRY/amster:${DRONE_BRANCH//\//-}-${DRONE_COMMIT_SHA:0:8}
+        - docker push $ECR_REGISTRY/amster:${DRONE_BRANCH//\//-}-${DRONE_COMMIT_SHA:0:8}
+        - docker tag am $ECR_REGISTRY/am:${DRONE_BRANCH//\//-}-${DRONE_COMMIT_SHA:0:8}
+        - docker push $ECR_REGISTRY/am:${DRONE_BRANCH//\//-}-${DRONE_COMMIT_SHA:0:8}
 
 services:
   - name: docker
