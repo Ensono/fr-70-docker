@@ -45,7 +45,7 @@ steps:
       commands:
         - sleep 5
         - cd amster/samples/docker
-        - docker build .
+        - docker build -t amster:DRONE_BUILD_NUMBER .
         - docker images ls
 
 services:
