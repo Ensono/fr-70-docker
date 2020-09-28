@@ -43,9 +43,10 @@ steps:
         - name: dockersock
           path: /var/run
       commands:
-        - sleep 30
+        - sleep 5
         - cd amster/samples/docker
         - docker build .
+        - docker images ls
 
 services:
   - name: docker
