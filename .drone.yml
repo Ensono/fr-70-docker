@@ -22,21 +22,6 @@ steps:
         - cd amster/samples/docker
         - ./setup.sh
 
-    # - name: publish  
-    #   image: plugins/ecr
-    #   # commands:
-    #   #   - pwd
-    #   settings:
-    #     access_key:
-    #       from_secret: AWS_ACCESS_KEY_ID
-    #     secret_key:
-    #       from_secret: AWS_SECRET_ACCESS_KEY 
-    #     create_repository: true
-    #     repo: dronetest
-    #     registry: 499815288658.dkr.ecr.eu-west-1.amazonaws.com
-    #     dockerfile: amster/samples/docker/Dockerfile
-    #     region: eu-west-1
-
     - name: publish  
       image: docker:latest
       environment:
@@ -48,7 +33,6 @@ steps:
         - name: dockersock
           path: /var/run
       commands:
-        # - apk update
         - export ECR_REGISTRY="499815288658.dkr.ecr.eu-west-1.amazonaws.com"
         - apk add --update --no-cache jq curl py-pip
         - pip install awscli
