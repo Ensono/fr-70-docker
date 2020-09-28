@@ -43,6 +43,7 @@ steps:
         - name: dockersock
           path: /var/run
       commands:
+        - apk update
         - apk add --no-cache curl jq python py-pip
         - pip install awscli
         - cd amster/samples/docker
