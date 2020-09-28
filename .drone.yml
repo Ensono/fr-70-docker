@@ -69,7 +69,7 @@ volumes:
 # run tests
 # docker pull $ECR_REGISTRY/<app_name>:$DRONE_COMMIT_SHA
 # docker tag "from_ci" or "tests_passed" etc
-# docker push
+# docker push (when branch is master)
 
 
 # ${DRONE_BRANCH//\//-}-${DRONE_COMMIT_SHA:0:8}
