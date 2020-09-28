@@ -52,7 +52,7 @@ steps:
         - apk add --update --no-cache jq curl py-pip
         - pip install awscli
         - cd amster/samples/docker
-        - $(aws ecr get-login --no-include-email --region us-east-1)
+        - $(aws ecr get-login --no-include-email --region eu-west-1)
         - docker build -t amster .
         - docker tag amster:latest 499815288658.dkr.ecr.eu-west-1.amazonaws.com/amster:$DRONE_BUILD_NUMBER
         - docker push 499815288658.dkr.ecr.eu-west-1.amazonaws.com/amster:$DRONE_BUILD_NUMBER
