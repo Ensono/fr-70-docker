@@ -3,7 +3,7 @@ name: build base images
 
 steps:
     - name: build  
-      image: node
+      image: debian:stable-slim
       environment:
         AWS_ACCESS_KEY_ID:
             from_secret: AWS_ACCESS_KEY_ID
@@ -49,7 +49,7 @@ steps:
         - docker build -t amster .
         - docker tag amster $ECR_REGISTRY/amster:${DRONE_BRANCH//\//-}-${DRONE_COMMIT_SHA:0:8}
         - docker push $ECR_REGISTRY/amster:${DRONE_BRANCH//\//-}-${DRONE_COMMIT_SHA:0:8}
-        - cd 
+        # - cd 
 
 services:
   - name: docker
