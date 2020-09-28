@@ -38,7 +38,10 @@ steps:
     #     region: eu-west-1
 
     - name: publish  
-      image: docker
+      image: docker:dind
+      volumes:
+        - name: dockersock
+          path: /var/run
       commands:
         - sleep 30
         - cd amster/samples/docker
