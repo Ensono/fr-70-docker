@@ -19,8 +19,9 @@ steps:
         # - unzip -q IG-7.0.0.zip -d ig 
         # - unzip -q IDM-7.0.1.zip -d idm 
         # - unzip -q AM-7.0.0.zip -d am
-        - amster/samples/docker/setup.sh
-        
+        - cd amster/samples/docker
+        - ./setup.sh
+
       
     # - name: publish  
     #   image: plugins/ecr
