@@ -22,7 +22,6 @@ steps:
         - cd amster/samples/docker
         - ./setup.sh
 
-      
     # - name: publish  
     #   image: plugins/ecr
     #   # commands:
@@ -41,4 +40,5 @@ steps:
     - name: publish  
       image: docker
       commands:
-        - docker build -f amster/samples/docker/Dockerfile .
+        - cd amster/samples/docker
+        - docker build .
