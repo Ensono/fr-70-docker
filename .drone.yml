@@ -15,7 +15,8 @@ steps:
       commands:
         # - apk add --update --no-cache jq curl py-pip unzip bash
         - apt update && apt install -y python3-setuptools python3-pip
-        - pip install awscli
+        # - pip install awscli
+        - pip3 --no-cache-dir install -U awscli
         - aws s3 sync s3://forgerock7-binaries .
         - unzip -q Amster-7.0.0.zip -d amster
         - unzip -q AM-7.0.0.zip -d am
