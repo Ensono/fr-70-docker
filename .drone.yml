@@ -32,7 +32,7 @@ steps:
     #     - sed -i'.tmp' -e 's/openam.war/AM.war/g' Dockerfile
 
     - name: build-images  
-      image: docker:latest
+      image: docker:19.03.13
       environment:
         AWS_ACCESS_KEY_ID:
             from_secret: AWS_ACCESS_KEY_ID
