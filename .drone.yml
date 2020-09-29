@@ -13,7 +13,8 @@ steps:
         - name: dockersock
           path: /var/run
       commands:
-        - apk add --update --no-cache jq curl py-pip unzip bash
+        # - apk add --update --no-cache jq curl py-pip unzip bash
+        - apt update && apt install -y python3-setuptools python3-pip
         - pip install awscli
         - aws s3 sync s3://forgerock7-binaries .
         - unzip -q Amster-7.0.0.zip -d amster
