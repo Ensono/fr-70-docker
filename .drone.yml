@@ -55,7 +55,6 @@ steps:
         - unzip -q IDM-7.0.1.zip -d idm
         - cd amster/samples/docker
         - ./setup.sh
-        - docker build --tag amster:7.0 .
         - cd /drone/src/am/openam/samples/docker
         - chmod u+x setup.sh
         - sed -i'.tmp' -e 's/[Oo]pen[Aa][Mm]/AM/g' setup.sh
@@ -64,14 +63,19 @@ steps:
         - chmod u+x docker-entrypoint.sh
         - chmod u+x scripts/*
         - sed -i'.tmp' -e 's/openam.war/AM.war/g' Dockerfile
-        - docker build --tag am-empty:7.0 .
         - cd ../am-base
         - chmod u+x docker-entrypoint.sh
         - chmod u+x scripts/*
-        - docker build --build-arg docker_tag=7.0 --tag my-registry/am-base:7.0 .
-        - docker tag amster:7.0 my-registry/amster:7.0
+        - cd /drone/src/ds/opendj/samples/docker
+        - ./setup.sh
+        # - cd /drone/src/idm/openidm
+
         
-        
+        # - docker build --tag amster:7.0 .
+        # - docker build --tag am-empty:7.0 .
+        # - docker build --build-arg docker_tag=7.0 --tag my-registry/am-base:7.0 .
+        # - docker build --tag my-registry/ds:7.0 .
+        # - docker tag amster:7.0 my-registry/amster:7.0
         # - docker tag amster $ECR_REGISTRY/amster:${DRONE_BRANCH//\//-}-${DRONE_COMMIT_SHA:0:8}
         # - docker push $ECR_REGISTRY/amster:${DRONE_BRANCH//\//-}-${DRONE_COMMIT_SHA:0:8}
         # - docker tag am $ECR_REGISTRY/am:${DRONE_BRANCH//\//-}-${DRONE_COMMIT_SHA:0:8}
