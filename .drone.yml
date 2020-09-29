@@ -3,7 +3,7 @@ name: build base images
 
 steps:
     - name: setup  
-      image: docker
+      image: java
       environment:
         AWS_ACCESS_KEY_ID:
             from_secret: AWS_ACCESS_KEY_ID
@@ -13,10 +13,12 @@ steps:
         - name: dockersock
           path: /var/run
       commands:
-        - apt update && apt install curl unzip -y
-        - curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-        - unzip -q awscliv2.zip
-        - ./aws/install
+        # - apt update && apt install curl unzip -y
+        # - curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+        # - unzip -q awscliv2.zip
+        # - ./aws/install
+        - apk add --update --no-cache jq curl py-pip unzip bash
+        - pip install awscli
         - aws s3 sync s3://forgerock7-binaries .
         - unzip -q Amster-7.0.0.zip -d amster
         - unzip -q AM-7.0.0.zip -d am
@@ -36,10 +38,29 @@ steps:
         - cd ../am-base
         - chmod u+x docker-entrypoint.sh
         - chmod u+x scripts/*
+        - cd /drone/src/ds/opendj
+        - ./samples/docker/setup.sh
+
+    # - name: build-images  
+    #   image: docker:19.03.13
+    #   environment:
+    #     AWS_ACCESS_KEY_ID:
+    #         from_secret: AWS_ACCESS_KEY_ID
+    #     AWS_SECRET_ACCESS_KEY:
+    #         from_secret: AWS_SECRET_ACCESS_KEY
+    #     ECR_REGISTRY:
+    #         from_secret: ECR_REGISTRY
+    #   volumes:
+    #     - name: dockersock
+    #       path: /var/run
+    #   commands:
+    #     - apt update && apt install curl unzip -y
+          # - curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+          # - unzip -q awscliv2.zip
+          # - ./aws/install
+        # - cd /drone/src/idm/openidm
+
         
-        
-        # - cd /drone/src/ds/opendj
-        # - ./samples/docker/setup.sh
         # - docker build --tag amster:7.0 .
         # - docker build --tag am-empty:7.0 .
         # - docker build --build-arg docker_tag=7.0 --tag my-registry/am-base:7.0 .
