@@ -43,7 +43,7 @@ steps:
           path: /var/run
       commands:
         - export ECR_REGISTRY="499815288658.dkr.ecr.eu-west-1.amazonaws.com"
-        - apk add --update --no-cache jq curl py-pip unzip
+        - apk add --update --no-cache jq curl py-pip unzip bash
         - pip install awscli
         - $(aws ecr get-login --no-include-email --region eu-west-1)
         - aws s3 sync s3://forgerock7-binaries . --no-progress
@@ -52,7 +52,6 @@ steps:
         - unzip -q DS-7.0.0.zip -d ds
         - unzip -q IG-7.0.0.zip -d ig 
         - unzip -q IDM-7.0.1.zip -d idm
-        - ls amster/samples/docker
         - cd amster/samples/docker
         - ./setup.sh
         - docker build -t amster .
