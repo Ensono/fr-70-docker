@@ -42,8 +42,8 @@ steps:
         - name: dockersock
           path: /var/run
       commands:
-        # - export ECR_REGISTRY="499815288658.dkr.ecr.eu-west-1.amazonaws.com"
-        - echo $(aws ecr get-login-password)|docker login --password-stdin --username AWS 499815288658.dkr.ecr.eu-west-1.amazonaws.com
+        - export ECR_REGISTRY="499815288658.dkr.ecr.eu-west-1.amazonaws.com"
+        - $(aws ecr get-login --region eu-west-1 --no-include-email)
         - apk add --update --no-cache jq curl py-pip unzip bash
         - pip install awscli
         - $(aws ecr get-login --no-include-email --region eu-west-1)
