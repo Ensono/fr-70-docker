@@ -52,6 +52,7 @@ steps:
         - unzip -q DS-7.0.0.zip -d ds
         - unzip -q IG-7.0.0.zip -d ig 
         - unzip -q IDM-7.0.1.zip -d idm
+        - ls amster
         - cd amster/samples/docker
         - ./setup.sh
         - docker build -t amster .
