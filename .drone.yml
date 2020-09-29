@@ -67,11 +67,11 @@ steps:
         - cd ../am-base
         - chmod u+x docker-entrypoint.sh
         - chmod u+x scripts/*
-        - docker build --build-arg docker_tag=7.0 --tag $ECR_REGISTRY/am-base:7.0 .
-        - docker tag amster $ECR_REGISTRY/amster:${DRONE_BRANCH//\//-}-${DRONE_COMMIT_SHA:0:8}
-
-
-
+        - docker build --build-arg docker_tag=7.0 --tag my-registry/am-base:7.0 .
+        - docker tag amster:7.0 my-registry/amster:7.0
+        
+        
+        # - docker tag amster $ECR_REGISTRY/amster:${DRONE_BRANCH//\//-}-${DRONE_COMMIT_SHA:0:8}
         # - docker push $ECR_REGISTRY/amster:${DRONE_BRANCH//\//-}-${DRONE_COMMIT_SHA:0:8}
         # - docker tag am $ECR_REGISTRY/am:${DRONE_BRANCH//\//-}-${DRONE_COMMIT_SHA:0:8}
         # push will only happen when branch is master eventually
