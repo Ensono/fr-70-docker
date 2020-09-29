@@ -2,52 +2,19 @@ kind: pipeline
 name: build base images
 
 steps:
-    # - name: setup  
-    #   image: debian:stable-slim
-    #   environment:
-    #     AWS_ACCESS_KEY_ID:
-    #         from_secret: AWS_ACCESS_KEY_ID
-    #     AWS_SECRET_ACCESS_KEY:
-    #         from_secret: AWS_SECRET_ACCESS_KEY
-    #   commands:
-    #     # - apt update && apt install curl unzip -y
-    #     # - curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-    #     # - unzip -q awscliv2.zip
-    #     # - ./aws/install
-    #     # - aws s3 sync s3://forgerock7-binaries . --no-progress
-    #     # - unzip -q Amster-7.0.0.zip -d amster
-    #     # - unzip -q AM-7.0.0.zip -d am
-    #     # - unzip -q DS-7.0.0.zip -d ds
-    #     # - unzip -q IG-7.0.0.zip -d ig 
-    #     # - unzip -q IDM-7.0.1.zip -d idm 
-    #     # - cd amster/samples/docker
-    #     # - ./setup.sh
-    #     - cd /drone/src/am/openam/samples/docker
-    #     - chmod u+x setup.sh
-    #     - sed -i'.tmp' -e 's/[Oo]pen[Aa][Mm]/AM/g' setup.sh
-    #     - ./setup.sh
-    #     - cd images/am-empty
-    #     - chmod u+x docker-entrypoint.sh
-    #     - chmod u+x scripts/*
-    #     - sed -i'.tmp' -e 's/openam.war/AM.war/g' Dockerfile
-
-    - name: build-images  
-      image: docker:19.03.13
+    - name: setup  
+      image: debian:stable-slim
       environment:
         AWS_ACCESS_KEY_ID:
             from_secret: AWS_ACCESS_KEY_ID
         AWS_SECRET_ACCESS_KEY:
             from_secret: AWS_SECRET_ACCESS_KEY
-        ECR_REGISTRY:
-            from_secret: ECR_REGISTRY
-      volumes:
-        - name: dockersock
-          path: /var/run
       commands:
-        - apk add --update --no-cache jq curl py-pip unzip bash
-        - pip install awscli
-        - $(aws ecr get-login --no-include-email --region eu-west-1)
-        - aws s3 sync s3://forgerock7-binaries .
+        - apt update && apt install curl unzip -y
+        - curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+        - unzip -q awscliv2.zip
+        - ./aws/install
+        - aws s3 sync s3://forgerock7-binaries . --no-progress
         - unzip -q Amster-7.0.0.zip -d amster
         - unzip -q AM-7.0.0.zip -d am
         - unzip -q DS-7.0.0.zip -d ds
@@ -66,8 +33,23 @@ steps:
         - cd ../am-base
         - chmod u+x docker-entrypoint.sh
         - chmod u+x scripts/*
-        - cd /drone/src/ds/opendj/samples/docker
-        - ./setup.sh
+        - cd /drone/src/ds/opendj
+        - ./samples/docker/setup.sh
+
+    # - name: build-images  
+    #   image: docker:19.03.13
+    #   environment:
+    #     AWS_ACCESS_KEY_ID:
+    #         from_secret: AWS_ACCESS_KEY_ID
+    #     AWS_SECRET_ACCESS_KEY:
+    #         from_secret: AWS_SECRET_ACCESS_KEY
+    #     ECR_REGISTRY:
+    #         from_secret: ECR_REGISTRY
+    #   volumes:
+    #     - name: dockersock
+    #       path: /var/run
+    #   commands:
+    #     - 
         # - cd /drone/src/idm/openidm
 
         
@@ -83,17 +65,17 @@ steps:
         # - docker push $ECR_REGISTRY/am:${DRONE_BRANCH//\//-}-${DRONE_COMMIT_SHA:0:8}
 
 
-services:
-  - name: docker
-    image: docker:dind
-    privileged: true
-    volumes:
-    - name: dockersock
-      path: /var/run
+# services:
+#   - name: docker
+#     image: docker:dind
+#     privileged: true
+#     volumes:
+#     - name: dockersock
+#       path: /var/run
 
-volumes:
-  - name: dockersock
-    temp: {}
+# volumes:
+#   - name: dockersock
+#     temp: {}
 
 
 ## NEXT STEPS
