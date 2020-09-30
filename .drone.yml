@@ -42,13 +42,13 @@ steps:
         - chmod u+x docker-entrypoint.sh
         - chmod u+x scripts/*
         - docker build --build-arg docker_tag=7.0 --tag $ECR_REGISTRY/am/am-base:${DRONE_COMMIT_SHA:0:8} .
-        - docker tag amster:7.0 $ECR_REGISTRY/amster/amster:${DRONE_COMMIT_SHA:0:8}
         - cd /drone/src/ds/opendj
         - ./samples/docker/setup.sh
+        - docker build --tag $ECR_REGISTRY/ds/ds:${DRONE_COMMIT_SHA:0:8} .
+        - docker tag amster:7.0 $ECR_REGISTRY/amster/amster:${DRONE_COMMIT_SHA:0:8}
         
         
         
-        # - docker build --tag $ECR_REGISTRY/ds/ds:${DRONE_COMMIT_SHA:0:8} .
         # - docker build --tag $ECR_REGISTRY/ds:${DRONE_COMMIT_SHA:0:8} .
         # - docker tag amster $ECR_REGISTRY/amster:${DRONE_BRANCH//\//-}-${DRONE_COMMIT_SHA:0:8}
         # - docker push $ECR_REGISTRY/amster:${DRONE_BRANCH//\//-}-${DRONE_COMMIT_SHA:0:8}
