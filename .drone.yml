@@ -17,7 +17,7 @@ steps:
         # - curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
         # - unzip -q awscliv2.zip
         # - ./aws/install
-        - apk add --update --no-cache jq curl py-pip unzip bash
+        - apk add --update --no-cache jq curl py-pip unzip bash openjdk11
         - pip install awscli
         - aws s3 sync s3://forgerock7-binaries . --no-progress
         - unzip -q Amster-7.0.0.zip -d amster
@@ -40,10 +40,10 @@ steps:
         - cd ../am-base
         - chmod u+x docker-entrypoint.sh
         - chmod u+x scripts/*
+        - cd /drone/src/ds/opendj
+        - ./samples/docker/setup.sh
+        - docker build --build-arg docker_tag=7.0 --tag my-registry/am-base:7.0 .
         
-        # - cd /drone/src/ds/opendj
-        # - ./samples/docker/setup.sh
-        # - docker build --build-arg docker_tag=7.0 --tag my-registry/am-base:7.0 .
         # - docker build --tag my-registry/ds:7.0 .
         # - docker tag amster:7.0 my-registry/amster:7.0
         # - docker tag amster $ECR_REGISTRY/amster:${DRONE_BRANCH//\//-}-${DRONE_COMMIT_SHA:0:8}
