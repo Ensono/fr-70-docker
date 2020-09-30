@@ -2,7 +2,7 @@ kind: pipeline
 name: build base images
 
 steps:
-    - name: setup  
+    - name: build-images  
       image: docker:19.03.13
       environment:
         AWS_ACCESS_KEY_ID:
