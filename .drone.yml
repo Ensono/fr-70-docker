@@ -9,11 +9,13 @@ steps:
             from_secret: AWS_ACCESS_KEY_ID
         AWS_SECRET_ACCESS_KEY:
             from_secret: AWS_SECRET_ACCESS_KEY
+        ECR_REGISTRY:
+            from_secret: ECR_REGISTRY
       volumes:
         - name: dockersock
           path: /var/run
       commands:
-        # - apt update && apt install curl unzip -y
+        # - apt update && apt install curl unzip openjdk-11-jdk -y
         # - curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
         # - unzip -q awscliv2.zip
         # - ./aws/install
@@ -42,9 +44,10 @@ steps:
         - chmod u+x scripts/*
         - cd /drone/src/ds/opendj
         - ./samples/docker/setup.sh
-        - docker build --build-arg docker_tag=7.0 --tag my-registry/am-base:7.0 .
+        - docker build --build-arg docker_tag=7.0 --tag $ECR_REGISTRY/am-base:${DRONE_COMMIT_SHA:0:8} .
+        - docker build --tag $ECR_REGISTRY/ds:${DRONE_COMMIT_SHA:0:8} .
+        - docker image ls
         
-        # - docker build --tag my-registry/ds:7.0 .
         # - docker tag amster:7.0 my-registry/amster:7.0
         # - docker tag amster $ECR_REGISTRY/amster:${DRONE_BRANCH//\//-}-${DRONE_COMMIT_SHA:0:8}
         # - docker push $ECR_REGISTRY/amster:${DRONE_BRANCH//\//-}-${DRONE_COMMIT_SHA:0:8}
