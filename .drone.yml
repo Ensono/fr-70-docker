@@ -13,40 +13,7 @@ steps:
         - name: dockersock
           path: /var/run
       commands:
-        - export ECR_REGISTRY=499815288658.dkr.ecr.eu-west-1.amazonaws.com
-        - apk add --update --no-cache jq curl py-pip unzip bash openjdk11
-        - pip install awscli
-        - aws s3 sync s3://forgerock7-binaries . --no-progress
-        - unzip -q Amster-7.0.0.zip -d amster
-        - unzip -q AM-7.0.0.zip -d am
-        - unzip -q DS-7.0.0.zip -d ds
-        - unzip -q IG-7.0.0.zip -d ig 
-        - unzip -q IDM-7.0.1.zip -d idm
-        - cd amster/samples/docker
-        - ./setup.sh
-        - docker build --tag amster:7.0 .
-        - cd /drone/src/am/openam/samples/docker
-        - chmod u+x setup.sh
-        - sed -i'.tmp' -e 's/[Oo]pen[Aa][Mm]/AM/g' setup.sh
-        - ./setup.sh
-        - cd images/am-empty
-        - chmod u+x docker-entrypoint.sh
-        - chmod u+x scripts/*
-        - sed -i'.tmp' -e 's/openam.war/AM.war/g' Dockerfile
-        - docker build --tag am-empty:7.0 .
-        - cd ../am-base
-        - chmod u+x docker-entrypoint.sh
-        - chmod u+x scripts/*
-        - docker build --build-arg docker_tag=7.0 --tag $ECR_REGISTRY/am/am-base:${DRONE_COMMIT_SHA:0:8} .
-        - docker tag amster:7.0 $ECR_REGISTRY/amster/amster:${DRONE_COMMIT_SHA:0:8}
-        - cd /drone/src/ds/opendj
-        - ./samples/docker/setup.sh
-        - docker build --tag $ECR_REGISTRY/ds/ds:${DRONE_COMMIT_SHA:0:8} .
-        - cd /drone/src/idm/openidm
-        - docker build . --file bin/Custom.Dockerfile --tag $ECR_REGISTRY/idm/idm:${DRONE_COMMIT_SHA:0:8}
-        - cd /drone/src/ig/identity-gateway/docker
-        - docker build --tag $ECR_REGISTRY/ig/ig:${DRONE_COMMIT_SHA:0:8} .
-        - docker images
+        - docker system prune -f
       # when:
       #   branch:
       #     exclude:
