@@ -13,10 +13,6 @@ steps:
         - name: dockersock
           path: /var/run
       commands:
-        # - apt update && apt install curl unzip openjdk-11-jdk -y
-        # - curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-        # - unzip -q awscliv2.zip
-        # - ./aws/install
         - export ECR_REGISTRY=499815288658.dkr.ecr.eu-west-1.amazonaws.com
         - apk add --update --no-cache jq curl py-pip unzip bash openjdk11
         - pip install awscli
@@ -48,6 +44,13 @@ steps:
         - docker build --tag $ECR_REGISTRY/ds/ds:${DRONE_COMMIT_SHA:0:8} .
         - cd /drone/src/idm/openidm
         - docker build . --file bin/Custom.Dockerfile --tag $ECR_REGISTRY/idm/idm:${DRONE_COMMIT_SHA:0:8}
+        - cd /drone/src/ig/identity-gateway/docker
+        - docker build --tag $ECR_REGISTRY/ig/ig:${DRONE_COMMIT_SHA:0:8} .
+        - docker images
+      # when:
+      #   branch:
+      #     exclude:
+      #       - master
         
         
         # - docker build --tag $ECR_REGISTRY/ds:${DRONE_COMMIT_SHA:0:8} .
