@@ -46,6 +46,7 @@ steps:
         - docker build . --file bin/Custom.Dockerfile --tag $ECR_REGISTRY/idm/idm:${DRONE_COMMIT_SHA:0:8}
         - cd /drone/src/ig/identity-gateway/docker
         - docker build --tag $ECR_REGISTRY/ig/ig:${DRONE_COMMIT_SHA:0:8} .
+        - docker iamges
       # when:
       #   branch:
       #     exclude:
