@@ -24,7 +24,7 @@ steps:
         - unzip -q IDM-7.0.1.zip -d idm
         - cd amster/samples/docker
         - ./setup.sh
-        - docker system prune -f
+        - docker rmi $(docker images -q)
         - docker build --tag amster:7.0 .
         - cd /drone/src/am/openam/samples/docker
         - chmod u+x setup.sh
