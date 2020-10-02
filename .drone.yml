@@ -37,15 +37,15 @@ steps:
         - cd ../am-base
         - chmod u+x docker-entrypoint.sh
         - chmod u+x scripts/*
-        - docker build --build-arg docker_tag=7.0 --tag $ECR_REGISTRY/am-base-image:${DRONE_COMMIT_SHA:0:8} .
-        - docker tag amster:7.0 $ECR_REGISTRY/amster-base-image:${DRONE_COMMIT_SHA:0:8}
+        - docker build --build-arg docker_tag=7.0 --tag $ECR_REGISTRY/am-base:${DRONE_COMMIT_SHA:0:8} .
+        - docker tag amster:7.0 $ECR_REGISTRY/amster:${DRONE_COMMIT_SHA:0:8}
         - cd /drone/src/ds/opendj
         - ./samples/docker/setup.sh
-        - docker build --tag $ECR_REGISTRY/ds-base-image:${DRONE_COMMIT_SHA:0:8} .
+        - docker build --tag $ECR_REGISTRY/ds:${DRONE_COMMIT_SHA:0:8} .
         - cd /drone/src/idm/openidm
-        - docker build . --file bin/Custom.Dockerfile --tag $ECR_REGISTRY/idm-base-image:${DRONE_COMMIT_SHA:0:8}
+        - docker build . --file bin/Custom.Dockerfile --tag $ECR_REGISTRY/idm:${DRONE_COMMIT_SHA:0:8}
         - cd /drone/src/ig/identity-gateway/docker
-        - docker build --tag $ECR_REGISTRY/ig-base-image:${DRONE_COMMIT_SHA:0:8} .
+        - docker build --tag $ECR_REGISTRY/ig:${DRONE_COMMIT_SHA:0:8} .
 
     - name: publish 
       image: docker:19.03.0
@@ -62,11 +62,11 @@ steps:
         - apk add --update --no-cache jq curl py-pip bash
         - pip install awscli
         - aws ecr get-login-password --region eu-west-1 | docker login --username AWS --password-stdin $ECR_REGISTRY
-        - docker push $ECR_REGISTRY/am-base-image:${DRONE_COMMIT_SHA:0:8}
-        - docker push $ECR_REGISTRY/amster-base-image:${DRONE_COMMIT_SHA:0:8}
-        - docker push $ECR_REGISTRY/ds-base-image:${DRONE_COMMIT_SHA:0:8}
-        - docker push $ECR_REGISTRY/idm-base-image:${DRONE_COMMIT_SHA:0:8}
-        - docker push $ECR_REGISTRY/ig-base-image:${DRONE_COMMIT_SHA:0:8}
+        - docker push $ECR_REGISTRY/am-base:${DRONE_COMMIT_SHA:0:8}
+        - docker push $ECR_REGISTRY/amster:${DRONE_COMMIT_SHA:0:8}
+        - docker push $ECR_REGISTRY/ds:${DRONE_COMMIT_SHA:0:8}
+        - docker push $ECR_REGISTRY/idm:${DRONE_COMMIT_SHA:0:8}
+        - docker push $ECR_REGISTRY/ig:${DRONE_COMMIT_SHA:0:8}
       # when:
       #   branch:
       #     - master
