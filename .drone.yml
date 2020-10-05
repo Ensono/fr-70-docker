@@ -67,9 +67,11 @@ steps:
         - docker push $ECR_REGISTRY/ds:${DRONE_COMMIT_SHA:0:8}
         - docker push $ECR_REGISTRY/idm:${DRONE_COMMIT_SHA:0:8}
         - docker push $ECR_REGISTRY/ig:${DRONE_COMMIT_SHA:0:8}
-      # when:
-      #   branch:
-      #     - master
+      when:
+        branch:
+          - master
+        event:
+          - push
 
 
 services:
