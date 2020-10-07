@@ -66,6 +66,8 @@ steps:
     when:
       branch:
         - master
+      event:
+        - push
 
 services:
   - name: docker
