@@ -14,8 +14,6 @@ steps:
         path: /var/run
     commands:
       - export ECR_REGISTRY=499815288658.dkr.ecr.eu-west-1.amazonaws.com
-      # - apk add --update --no-cache jq curl py-pip unzip bash openjdk11
-      # - pip install awscli
       - aws s3 sync s3://forgerock7-binaries . --no-progress
       - unzip -q Amster-7.0.0.zip -d amster
       - unzip -q AM-7.0.0.zip -d am
@@ -59,17 +57,15 @@ steps:
         path: /var/run
     commands:
       - export ECR_REGISTRY=499815288658.dkr.ecr.eu-west-1.amazonaws.com
-      # - apk add --update --no-cache jq curl py-pip bash
-      # - pip install awscli
       - aws ecr get-login-password --region eu-west-1 | docker login --username AWS --password-stdin $ECR_REGISTRY
       - docker push $ECR_REGISTRY/am-base:${DRONE_COMMIT_SHA:0:8}
       - docker push $ECR_REGISTRY/amster:${DRONE_COMMIT_SHA:0:8}
       - docker push $ECR_REGISTRY/ds:${DRONE_COMMIT_SHA:0:8}
       - docker push $ECR_REGISTRY/idm:${DRONE_COMMIT_SHA:0:8}
       - docker push $ECR_REGISTRY/ig:${DRONE_COMMIT_SHA:0:8}
-    # when:
-    #   branch:
-    #     - master
+    when:
+      branch:
+        - master
 
 services:
   - name: docker
