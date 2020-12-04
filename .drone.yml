@@ -7,7 +7,6 @@ steps:
     commands:
       - aws s3 sync s3://forgerock7-binaries . --no-progress
 
-steps:
   - name: build-base-amster
     image: amidodevelopment/drone-runner-image:latest
     commands:
@@ -15,7 +14,6 @@ steps:
       - cd amster/samples/docker
       - ./setup.sh
 
-steps:
   - name: build-empty-am
     image: amidodevelopment/drone-runner-image:latest
     commands:
@@ -39,12 +37,12 @@ steps:
 #   - name: build-empty-am
 #     image: amidodevelopment/drone-runner-image:latest
 #     commands:
-      # - unzip -q AM-7.0.0.zip -d am
+# - unzip -q AM-7.0.0.zip -d am
 #       - unzip -q DS-7.0.0.zip -d ds
 #       - unzip -q IG-7.0.0.zip -d ig
 #       - unzip -q IDM-7.0.1.zip -d idm
-      # - cd amster/samples/docker
-      # - ./setup.sh
+# - cd amster/samples/docker
+# - ./setup.sh
 #       - docker build --tag amster:7.0 .
 #       - cd /drone/src/am/openam/samples/docker
 #       - chmod u+x setup.sh
@@ -67,7 +65,6 @@ steps:
 #       - docker build . --file bin/Custom.Dockerfile --tag $ECR_REGISTRY/idm:${DRONE_COMMIT_SHA:0:8}
 #       - cd /drone/src/ig/identity-gateway/docker
 #       - docker build --tag $ECR_REGISTRY/ig:${DRONE_COMMIT_SHA:0:8} .
-
 
 #   - name: publish
 #     image: amidodevelopment/drone-runner-image:latest
