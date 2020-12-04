@@ -30,8 +30,7 @@ steps:
       - cd ../am-base
       - chmod u+x docker-entrypoint.sh
       - chmod u+x scripts/*
-      - sed -i'.tmp' -e 's/FROM amster/FROM 499815288658.dkr.ecr.eu-west-1.amazonaws.com\\/id\\/amster/' Dockerfile
-      - sed -i'.tmp' -e 's/FROM am-empty/FROM 499815288658.dkr.ecr.eu-west-1.amazonaws.com\/id\/am-base/' Dockerfile
+      - sed -i'.tmp' -e 's/FROM amster/FROM ecr.tooling.dvla.gov.uk\\/id\\/amster/g' Dockerfile
 
 # steps:
 #   - name: build-empty-am
