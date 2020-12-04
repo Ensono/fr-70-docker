@@ -10,14 +10,14 @@ steps:
   - name: build-base-amster
     image: amidodevelopment/drone-runner-image:latest
     commands:
-      - unzip -q Amster-7.0.0.zip -d amster
+      - unzip -q Amster-7.0.*.zip -d amster
       - cd amster/samples/docker
       - ./setup.sh
 
   - name: build-empty-am
     image: amidodevelopment/drone-runner-image:latest
     commands:
-      - unzip -q AM-7.0.0.zip -d am
+      - unzip -q AM-7.0.*.zip -d am
       - cd am/openam/samples/docker
       - chmod u+x setup.sh
       - sed -i'.tmp' -e 's/[Oo]pen[Aa][Mm]/AM/g' setup.sh
