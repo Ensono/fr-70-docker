@@ -54,12 +54,12 @@ steps:
       - cd ds/opendj
       - ./samples/docker/setup.sh
 
-  # - name: build-base-idm
-  #   image: alpine:3.12.1
-  #   commands:
-  #     - mkdir idm
-  #     - unzip -q idm.zip -d idm
-  #     - cd idm/openidm
+  - name: build-base-idm
+    image: alpine:3.12.1
+    commands:
+      - mkdir idm
+      - unzip -q IDM-7.0.*.zip -d idm
+      - cd idm/openidm
 
 image_pull_secrets:
   - dockerconfig
