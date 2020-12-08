@@ -2,10 +2,20 @@ kind: pipeline
 name: build base images
 
 steps:
-  - name: pull-binaries
-    image: 499815288658.dkr.ecr.eu-west-1.amazonaws.com/drone-runner-image:latest
+  ecr-auth:
+    image: omerxx/drone-ecr-auth
+    pull: true
+    privileged: true
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
     commands:
-      - aws s3 sync s3://forgerock7-binaries . --no-progress
+      - $(aws ecr get-login --no-include-email --region us-east-1)
+      - docker pull 499815288658.dkr.ecr.eu-west-1.amazonaws.com/drone-runner-image
+
+  name: pull-binaries
+  image: 499815288658.dkr.ecr.eu-west-1.amazonaws.com/drone-runner-image:latest
+  commands:
+    - aws s3 sync s3://forgerock7-binaries . --no-progress
 
   # - name: build-base-amster
   #   image: 499815288658.dkr.ecr.eu-west-1.amazonaws.com/drone-runner-image:latest
