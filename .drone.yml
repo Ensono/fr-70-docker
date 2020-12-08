@@ -35,15 +35,15 @@ steps:
 
   - name: publish-am-empty
     image: plugins/ecr
-    environment:
-      AWS_ACCESS_KEY_ID:
-        from_secret: AWS_ACCESS_KEY_ID
-      AWS_SECRET_ACCESS_KEY:
-        from_secret: AWS_SECRET_ACCESS_KEY
+    # environment:
+    #   AWS_ACCESS_KEY_ID:
+    #     from_secret: AWS_ACCESS_KEY_ID
+    #   AWS_SECRET_ACCESS_KEY:
+    #     from_secret: AWS_SECRET_ACCESS_KEY
     settings:
       repo: id/am-base
       registry: 714782054810.dkr.ecr.eu-west-2.amazonaws.com
-      region: eu-west-2
+      region: eu-west-1
       context: am/openam/samples/docker/images/am-empty
       dockerfile: am/openam/samples/docker/images/am-empty/Dockerfile
       force_tag: true
@@ -58,6 +58,13 @@ steps:
       - unzip -q ds.zip -d ds
       - cd ds/opendj
       - ./samples/docker/setup.sh
+
+  - name: build-base-idm
+    image: alpine:3.12.1
+    commands:
+      - mkdir idm
+      - unzip -q idm.zip -d idm
+      - cd idm/openidm
 
 # steps:
 #   - name: build-empty-am
