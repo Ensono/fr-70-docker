@@ -61,5 +61,19 @@ steps:
       - unzip -q IDM-7.0.*.zip -d idm
       - cd idm/openidm
 
+  - name: publish-base-amster
+    image: plugins/ecr
+    settings:
+      repo: id/amster
+      registry: 499815288658.dkr.ecr.eu-west-1.amazonaws.com
+      region: eu-west-1
+      context: amster/samples/docker
+      dockerfile: amster/samples/docker/Dockerfile
+      tags:
+        - "build-${DRONE_BUILD_NUMBER}"
+        - "${DRONE_COMMIT_SHA}"
+        - "link-${DRONE_BUILD_NUMBER}"
+        - "latest"
+
 image_pull_secrets:
   - dockerconfig
