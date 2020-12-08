@@ -7,12 +7,12 @@ steps:
     commands:
       - aws s3 sync s3://forgerock7-binaries . --no-progress
 
-  # - name: build-base-amster
-  #   image: 499815288658.dkr.ecr.eu-west-1.amazonaws.com/drone-runner-image:latest
-  #   commands:
-  #     - unzip -q Amster-7.0.*.zip -d amster
-  #     - cd amster/samples/docker
-  #     - ./setup.sh
+  - name: build-base-amster
+    image: 499815288658.dkr.ecr.eu-west-1.amazonaws.com/drone-runner-image:latest
+    commands:
+      - unzip -q Amster-7.0.*.zip -d amster
+      - cd amster/samples/docker
+      - ./setup.sh
 
   # - name: build-empty-am
   #   image: 499815288658.dkr.ecr.eu-west-1.amazonaws.com/drone-runner-image:latest
