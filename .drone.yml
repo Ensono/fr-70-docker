@@ -35,11 +35,11 @@ steps:
 
   - name: publish-am-empty
     image: plugins/ecr
-    environment:
-      AWS_ACCESS_KEY_ID:
-        from_secret: AWS_ACCESS_KEY_ID
-      AWS_SECRET_ACCESS_KEY:
-        from_secret: AWS_SECRET_ACCESS_KEY
+    # environment:
+    #   AWS_ACCESS_KEY_ID:
+    #     from_secret: AWS_ACCESS_KEY_ID
+    #   AWS_SECRET_ACCESS_KEY:
+    #     from_secret: AWS_SECRET_ACCESS_KEY
     settings:
       repo: id/am-base
       registry: 714782054810.dkr.ecr.eu-west-2.amazonaws.com
