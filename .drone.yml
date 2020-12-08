@@ -8,14 +8,14 @@ steps:
       - aws s3 sync s3://forgerock7-binaries . --no-progress
 
   - name: build-base-amster
-    amidodevelopment/drone-runner-image:latest
+    image: amidodevelopment/drone-runner-image:latest
     commands:
       - unzip -q Amster-7.0.*.zip -d amster
       - cd amster/samples/docker
       - ./setup.sh
 
   # - name: build-empty-am
-  #   amidodevelopment/drone-runner-image:latest
+  #   image: amidodevelopment/drone-runner-image:latest
   #   commands:
   #     - unzip -q AM-7.0.*.zip -d am
   #     - cd am/openam/samples/docker
