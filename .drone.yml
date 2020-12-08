@@ -50,7 +50,7 @@ steps:
     image: openjdk:11
     commands:
       - mkdir ds
-      - unzip -q ds.zip -d ds
+      - unzip -q DS-7.0.*.zip -d ds
       - cd ds/opendj
       - ./samples/docker/setup.sh
 
