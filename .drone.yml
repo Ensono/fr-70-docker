@@ -51,6 +51,14 @@ steps:
         - "latest"
         - "${DRONE_COMMIT_SHA}"
 
+  - name: build-base-ds
+    image: openjdk:11
+    commands:
+      - mkdir ds
+      - unzip -q ds.zip -d ds
+      - cd ds/opendj
+      - ./samples/docker/setup.sh
+
 # steps:
 #   - name: build-empty-am
 #     image: amidodevelopment/drone-runner-image:latest
