@@ -96,5 +96,22 @@ steps:
       event: push
       branch: master
 
+  - name: publish-base-idm
+    image: plugins/ecr
+    settings:
+      repo: id/idm
+      registry: 499815288658.dkr.ecr.eu-west-2.amazonaws.com
+      region: eu-west-1
+      context: idm/openidm
+      dockerfile: idm/openidm/bin/Custom.Dockerfile
+      tags:
+        - "build-${DRONE_BUILD_NUMBER}"
+        - "${DRONE_COMMIT_SHA}"
+        - "link-${DRONE_BUILD_NUMBER}"
+        - "latest"
+    when:
+      event: push
+      branch: master
+
 image_pull_secrets:
   - dockerconfig
