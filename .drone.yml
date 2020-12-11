@@ -105,9 +105,9 @@ steps:
       tags:
         - "${DRONE_COMMIT_SHA}"
         - "latest"
-    when:
-      event: push
-      branch: master
+    # when:
+    #   event: push
+    #   branch: master
 
 image_pull_secrets:
   - dockerconfig
