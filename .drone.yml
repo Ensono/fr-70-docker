@@ -88,9 +88,7 @@ steps:
       context: amster/samples/docker
       dockerfile: amster/samples/docker/Dockerfile
       tags:
-        - "build-${DRONE_BUILD_NUMBER}"
         - "${DRONE_COMMIT_SHA}"
-        - "link-${DRONE_BUILD_NUMBER}"
         - "latest"
     when:
       event: push
@@ -105,9 +103,7 @@ steps:
       context: idm/openidm
       dockerfile: idm/openidm/bin/Custom.Dockerfile
       tags:
-        - "build-${DRONE_BUILD_NUMBER}"
         - "${DRONE_COMMIT_SHA}"
-        - "link-${DRONE_BUILD_NUMBER}"
         - "latest"
     when:
       event: push
