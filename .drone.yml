@@ -61,7 +61,7 @@ steps:
   - name: build-base-ds
     image: amidodevelopment/drone-runner-image:latest
     commands:
-      - unzip -q ds.zip -d ds
+      - unzip -q DS-7.0.*.zip -d ds
       - cd ds/opendj
       - ./samples/docker/setup.sh
     # when:
