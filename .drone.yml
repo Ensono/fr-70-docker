@@ -6,9 +6,9 @@ steps:
     image: amidodevelopment/drone-runner-image:latest
     commands:
       - aws s3 sync s3://forgerock7-binaries . --no-progress
-    # when:
-    #   event: push
-    #   branch: master
+    when:
+      event: push
+      branch: master
 
   - name: build-base-amster
     image: amidodevelopment/drone-runner-image:latest
@@ -16,9 +16,9 @@ steps:
       - unzip -q Amster-7.0.*.zip -d amster
       - cd amster/samples/docker
       - ./setup.sh
-    # when:
-    #   event: push
-    #   branch: master
+    when:
+      event: push
+      branch: master
 
   - name: build-empty-am
     image: amidodevelopment/drone-runner-image:latest
@@ -38,9 +38,9 @@ steps:
       - chmod u+x scripts/*
       - sed -i'.tmp' -e 's/FROM amster/FROM '499815288658.dkr.ecr.eu-west-1.amazonaws.com'\\/forgeops\\/amster-base/g' Dockerfile
       - sed -i'.tmp' -e 's/FROM am-empty/FROM '499815288658.dkr.ecr.eu-west-1.amazonaws.com'\\/forgeops\\/am-base/g' Dockerfile
-    # when:
-    #   event: push
-    #   branch: master
+    when:
+      event: push
+      branch: master
 
   - name: publish-am-empty
     image: plugins/ecr
@@ -54,9 +54,9 @@ steps:
       tags:
         - "latest"
         - "build-${DRONE_BUILD_NUMBER}"
-    # when:
-    #   event: push
-    #   branch: master
+    when:
+      event: push
+      branch: master
 
   - name: build-base-ds
     image: amidodevelopment/drone-runner-image:latest
@@ -64,18 +64,18 @@ steps:
       - unzip -q DS-7.0.*.zip -d ds
       - cd ds/opendj
       - ./samples/docker/setup.sh
-    # when:
-    #   event: push
-    #   branch: master
+    when:
+      event: push
+      branch: master
 
   - name: build-base-idm
     image: amidodevelopment/drone-runner-image:latest
     commands:
       - unzip -q IDM-7.0.*.zip -d idm
       - cd idm/openidm
-    # when:
-    #   event: push
-    #   branch: master
+    when:
+      event: push
+      branch: master
 
   - name: publish-base-amster
     image: plugins/ecr
@@ -88,9 +88,9 @@ steps:
       tags:
         - "build-${DRONE_BUILD_NUMBER}"
         - "latest"
-    # when:
-    #   event: push
-    #   branch: master
+    when:
+      event: push
+      branch: master
 
   - name: publish-base-am
     image: plugins/ecr
@@ -103,9 +103,9 @@ steps:
       tags:
         - "build-${DRONE_BUILD_NUMBER}"
         - "latest"
-    # when:
-    #   event: push
-    #   branch: master
+    when:
+      event: push
+      branch: master
 
   - name: publish-base-ds
     image: plugins/ecr
@@ -118,9 +118,9 @@ steps:
       tags:
         - "build-${DRONE_BUILD_NUMBER}"
         - "latest"
-    # when:
-    #   event: push
-    #   branch: master
+    when:
+      event: push
+      branch: master
 
   - name: publish-base-idm
     image: plugins/ecr
@@ -133,9 +133,9 @@ steps:
       tags:
         - "build-${DRONE_BUILD_NUMBER}"
         - "latest"
-    # when:
-    #   event: push
-    #   branch: master
+    when:
+      event: push
+      branch: master
 
 image_pull_secrets:
   - dockerconfig
