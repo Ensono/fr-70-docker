@@ -8,7 +8,7 @@ steps:
       - aws s3 sync s3://forgerock7-binaries . --no-progress
     when:
       event: push
-      # branch: master
+      branch: master
 
   - name: build-base-amster
     image: alpine:3.12.1
@@ -20,7 +20,7 @@ steps:
       - ./setup.sh
     when:
       event: push
-      # branch: master
+      branch: master
 
   - name: build-empty-am
     image: alpine:3.12.1
@@ -44,7 +44,7 @@ steps:
       - sed -i'.tmp' -e 's/FROM am-empty/FROM '499815288658.dkr.ecr.eu-west-1.amazonaws.com'\\/forgeops\\/am-base/g' Dockerfile
     when:
       event: push
-      # branch: master
+      branch: master
 
   - name: publish-am-empty
     image: plugins/ecr
@@ -60,7 +60,7 @@ steps:
         - "build-${DRONE_BUILD_NUMBER}"
     when:
       event: push
-      # branch: master
+      branch: master
 
   - name: build-base-ds
     image: openjdk:11
@@ -71,7 +71,7 @@ steps:
       - ./samples/docker/setup.sh
     when:
       event: push
-      # branch: master
+      branch: master
 
   - name: build-base-idm
     image: alpine:3.12.1
@@ -81,7 +81,7 @@ steps:
       - cd idm/openidm
     when:
       event: push
-      # branch: master
+      branch: master
 
   - name: publish-base-amster
     image: plugins/ecr
@@ -96,7 +96,7 @@ steps:
         - "latest"
     when:
       event: push
-      # branch: master
+      branch: master
 
   - name: publish-base-am
     image: plugins/ecr
@@ -111,7 +111,7 @@ steps:
         - "latest"
     when:
       event: push
-      # branch: master
+      branch: master
 
   - name: publish-base-ds
     image: plugins/ecr
@@ -126,7 +126,7 @@ steps:
         - "latest"
     when:
       event: push
-      # branch: master
+      branch: master
 
   - name: publish-base-idm
     image: plugins/ecr
@@ -141,7 +141,7 @@ steps:
         - "latest"
     when:
       event: push
-      # branch: master
+      branch: master
 
 image_pull_secrets:
   - dockerconfig
