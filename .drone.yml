@@ -14,6 +14,7 @@ steps:
     image: alpine:3.12.1
     commands:
       - apk update && apk add bash
+      - mkdir amster
       - unzip -q Amster-7.0.*.zip -d amster
       - cd amster/samples/docker
       - ./setup.sh
@@ -25,6 +26,7 @@ steps:
     image: alpine:3.12.1
     commands:
       - apk update && apk add bash
+      - mkdir am
       - unzip -q AM-7.0.*.zip -d am
       - cd am/openam/samples/docker
       - chmod u+x setup.sh
@@ -63,6 +65,7 @@ steps:
   - name: build-base-ds
     image: openjdk:11
     commands:
+      - mkdir ds
       - unzip -q DS-7.0.*.zip -d ds
       - cd ds/opendj
       - ./samples/docker/setup.sh
@@ -73,6 +76,7 @@ steps:
   - name: build-base-idm
     image: alpine:3.12.1
     commands:
+      - mkdir idm
       - unzip -q IDM-7.0.*.zip -d idm
       - cd idm/openidm
     when:
